@@ -375,3 +375,6 @@ endif
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 -include vendor/lineage/config/partner_gms.mk
+
+# exTHmUI priv-vendor
+$(call inherit-product, vendor/exthm-priv/config.mk)
