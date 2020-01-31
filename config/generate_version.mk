@@ -86,6 +86,10 @@ else
     endif
 endif
 
+ifdef EXTHM_ADDITIONAL_DETIALS
+    EXTHM_VERSION += -$(EXTHM_ADDITIONAL_DETIALS)
+endif
+
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     vendor/lineage/build/target/product/security/lineage
 
