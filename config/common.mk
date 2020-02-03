@@ -155,12 +155,16 @@ PRODUCT_PACKAGES += \
     LockClock \
     WeatherProvider
 
-# Custom exTHm packages
+# Core exTHmUI packages
+PRODUCT_PACKAGES += \
+    Longshot \
+    ThemeManager
+
+# Custom exTHmUI packages
 PRODUCT_PACKAGES += \
     Updater \
     APlayer \
-    Lawnchair \
-    Longshot
+    Lawnchair
 
 # MiPush
 ifneq ($(WITHOUT_MIPUSH),true)
