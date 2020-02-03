@@ -158,7 +158,23 @@ PRODUCT_PACKAGES += \
 # Custom exTHm packages
 PRODUCT_PACKAGES += \
     Updater \
-    APlayer
+    APlayer \
+    Lawnchair \
+    Longshot
+
+# MiPush
+ifneq ($(WITHOUT_MIPUSH),true)
+PRODUCT_PACKAGES += \
+    MiPushManager \
+    MiPushService
+
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.miui.ui.version.name = V10 \
+    ro.miui.ui.version.code = 8 \
+    ro.miui.version.code_time = 1544025600 \
+    ro.fota.oem = Xiaomi \
+    ro.miui.internal.storage = /sdcard/
+endif
 
 # Exchange support
 PRODUCT_PACKAGES += \
@@ -264,6 +280,3 @@ DEVICE_PACKAGE_OVERLAYS += vendor/lineage/overlay/common
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 -include vendor/lineage/config/partner_gms.mk
-
-# exTHmUI priv-vendor
-$(call inherit-product, vendor/exthm-priv/config.mk)
