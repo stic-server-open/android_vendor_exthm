@@ -141,11 +141,18 @@ PRODUCT_PACKAGES += \
     Jelly \
     LockClock \
     Profiles \
+    WeatherProvider
+
+# Core exTHmUI packages
+PRODUCT_PACKAGES += \
+    Longshot \
+    ThemeManager
+
+# Custom exTHmUI packages
+PRODUCT_PACKAGES += \
     Updater \
-    WeatherProvider \
     APlayer \
-    Lawnchair \
-    Longshot
+    Lawnchair
 
 # MiPush
 ifneq ($(WITHOUT_MIPUSH),true)
