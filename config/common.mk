@@ -89,6 +89,10 @@ PRODUCT_COPY_FILES += \
     vendor/lineage/config/permissions/privapp-permissions-lineage.xml:system/etc/permissions/privapp-permissions-lineage.xml \
     vendor/lineage/config/permissions/privapp-permissions-cm-legacy.xml:system/etc/permissions/privapp-permissions-cm-legacy.xml
 
+# And here is exTHm!
+PRODUCT_COPY_FILES += \
+    vendor/lineage/config/permissions/privapp-permissions-exthm.xml:system/etc/permissions/privapp-permissions-exthm.xml
+
 # Enforce privapp-permissions whitelist
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.control_privapp_permissions=enforce
