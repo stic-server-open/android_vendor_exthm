@@ -15,13 +15,13 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_arm.mk \
-    $(LOCAL_DIR)/lineage_arm64.mk \
-    $(LOCAL_DIR)/lineage_x86.mk \
-    $(LOCAL_DIR)/lineage_x86_64.mk
+    $(LOCAL_DIR)/exthm_arm.mk \
+    $(LOCAL_DIR)/exthm_arm64.mk \
+    $(LOCAL_DIR)/exthm_x86.mk \
+    $(LOCAL_DIR)/exthm_x86_64.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_arm-userdebug \
-    lineage_arm64-userdebug \
-    lineage_x86-userdebug \
-    lineage_x86_64-userdebug
+    exthm_arm-userdebug \
+    exthm_arm64-userdebug \
+    exthm_x86-userdebug \
+    exthm_x86_64-userdebug
