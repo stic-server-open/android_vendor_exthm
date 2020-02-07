@@ -35,6 +35,6 @@
     <!-- The default WebView implementation -->
     <webviewprovider description="AOSP WebView" packageName="com.android.webview" availableByDefault="true" />
 
-    <webviewprovider description="THExplorer" packageName="org.exthm.thexplorer" availableByDefault="true" />
+    <webviewprovider description="THExplorer" packageName="org.exthmui.THExplorer" availableByDefault="true" />
 
 </webviewproviders>
