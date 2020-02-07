@@ -39,6 +39,17 @@ except ImportError:
 
 from xml.etree import ElementTree
 
+default_manifest = ".repo/manifests/default.xml"
+lineage_manifest = ".repo/manifests/snippets/lineage.xml"
+exthm_manifest = ".repo/manifests/snippets/exthm.xml"
+
+custom_local_manifest = ".repo/local_manifests/roomservice.xml"
+custom_default_revision = "exthm-9"
+custom_dependencies = "exthm.dependencies"
+
+org_devices = "exthmui-devices"
+org_devices_display = "exthmui-devices"
+
 product = sys.argv[1]
 
 if len(sys.argv) > 2:
@@ -52,7 +63,7 @@ except:
     device = product
 
 if not depsonly:
-    print("Device %s not found. Attempting to retrieve device repository from exthmui-devices Github (http://github.com/exthmui-devices)." % device)
+    print("Device %s not found. Attempting to retrieve device repository from %s Github (http://github.com/%s)." % (device, org_devices , org_devices))
 
 repositories = []
 
@@ -72,7 +83,7 @@ def add_auth(githubreq):
         githubreq.add_header("Authorization","Basic %s" % githubauth)
 
 if not depsonly:
-    githubreq = urllib.request.Request("https://api.github.com/search/repositories?q=%s+user:exthmui-devices+in:name+fork:true" % device)
+    githubreq = urllib.request.Request("https://api.github.com/search/repositories?q=%s+user:%s+in:name+fork:true" % (device, org_devices))
     add_auth(githubreq)
     try:
         result = json.loads(urllib.request.urlopen(githubreq).read().decode())
@@ -110,11 +121,53 @@ def indent(elem, level=0):
         if level and (not elem.tail or not elem.tail.strip()):
             elem.tail = i
 
-def get_default_revision():
-    m = ElementTree.parse(".repo/manifest.xml")
+def load_manifest(manifest):
+    try:
+        man = ElementTree.parse(manifest).getroot()
+    except (IOError, ElementTree.ParseError):
+        man = ElementTree.Element("manifest")
+    return man
+
+def get_default(manifest=None):
+    m = manifest
+    if not m
+        m = load_manifest(default_manifest)
     d = m.findall('default')[0]
-    r = d.get('revision')
-    return r.replace('refs/heads/', '').replace('refs/tags/', '')
+    return d
+
+def get_remote(manifest=None, remote_name=None):
+    m = manifest
+    if not m
+        m = load_manifest(default_manifest)
+    if not remote_name:
+        remote_name = get_default(manifest=m).get('remote')
+    remotes = m.findall('remote')
+    for remote in remotes:
+        if remote_name == remote.get('name'):
+            return remote
+
+
+def get_revision(manifest=None, p=None):
+    m = manifest
+    if not m
+        m = load_manifest(default_manifest)
+    project = None
+    revision = None
+    if p:
+        for proj in m.findall('project'):
+            if proj.get('path').strip('/') == p:
+                project = proj
+                break
+    if project:
+        revision = project.get('revision')
+    if revision:
+        return revision.replace('refs/heads/', '').replace('refs/tags/', '')
+    remote = get_remote(manifest=m, remote_name=org_devices_display)
+    if remote:
+        revision = remote.get('revision')
+    if not revision:
+        return custom_default_revision
+    return revision.replace('refs/heads/', '').replace('refs/tags/', '')
 
 def get_from_manifest(devicename):
     try:
@@ -153,7 +206,7 @@ def is_in_manifest(projectpath):
 
     # ... and don't forget the lineage snippet
     try:
-        lm = ElementTree.parse(".repo/manifests/snippets/lineage.xml")
+        lm = ElementTree.parse(lineage_manifest)
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -161,9 +214,10 @@ def is_in_manifest(projectpath):
     for localpath in lm.findall("project"):
         if localpath.get("path") == projectpath:
             return True
+
     # ... also don't forget the exthm snippet
     try:
-        lm = ElementTree.parse(".repo/manifests/snippets/exthm.xml")
+        lm = ElementTree.parse(exthm_manifest)
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -176,7 +230,7 @@ def is_in_manifest(projectpath):
 
 def add_to_manifest(repositories, fallback_branch = None):
     try:
-        lm = ElementTree.parse(".repo/local_manifests/roomservice.xml")
+        lm = ElementTree.parse(custom_local_manifest)
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -186,12 +240,12 @@ def add_to_manifest(repositories, fallback_branch = None):
         repo_target = repository['target_path']
         print('Checking if %s is fetched from %s' % (repo_target, repo_name))
         if is_in_manifest(repo_target):
-            print('exthmui-devices/%s already fetched to %s' % (repo_name, repo_target))
+            print('%s/%s already fetched to %s' % (repo_name, repo_target))
             continue
 
-        print('Adding dependency: exthmui-devices/%s -> %s' % (repo_name, repo_target))
+        print('Adding dependency: %s/%s -> %s' % (org_devices, repo_name, repo_target))
         project = ElementTree.Element("project", attrib = { "path": repo_target,
-            "remote": "github", "name": "exthmui-devices/%s" % repo_name })
+            "remote": "%s" % org_devices, "name": "%s" % repo_name })
 
         if 'branch' in repository:
             project.set('revision',repository['branch'])
@@ -213,7 +267,7 @@ def add_to_manifest(repositories, fallback_branch = None):
 
 def fetch_dependencies(repo_path, fallback_branch = None):
     print('Looking for dependencies in %s' % repo_path)
-    dependencies_path = repo_path + '/exthm.dependencies'
+    dependencies_path = repo_path + '/' + custom_dependencies
     syncable_repos = []
     verify_repos = []
 
@@ -265,7 +319,7 @@ else:
             
             manufacturer = repo_name.replace("android_device_", "").replace("_" + device, "")
             
-            default_revision = get_default_revision()
+            default_revision = get_revision(manifest=exthm_manifest)
             print("Default revision: %s" % default_revision)
             print("Checking branch info")
             githubreq = urllib.request.Request(repository['branches_url'].replace('{/branch}', ''))
@@ -309,4 +363,4 @@ else:
             print("Done")
             sys.exit()
 
-print("Repository for %s not found in the exthmui-devices Github repository list. If this is in error, you may need to manually add it to your local_manifests/roomservice.xml." % device)
+print("Repository for %s not found in the %s Github repository list. If this is in error, you may need to manually add it to your local_manifests/roomservice.xml." % (org_devices, device))
