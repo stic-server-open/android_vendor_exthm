@@ -1,4 +1,4 @@
-for combo in $(curl -s https://raw.githubusercontent.com/exthmui/hudson/master/lineage-build-targets | sed -e 's/#.*$//' | grep exthm-9 | awk '{printf "exthm_%s-%s\n", $1, $2}')
+for combo in $(curl -s https://raw.githubusercontent.com/exthmui/hudson/master/exthm-build-targets | sed -e 's/#.*$//' | grep exthm-9 | awk '{printf "exthm_%s-%s\n", $1, $2}')
 do
     add_lunch_combo $combo
 done
