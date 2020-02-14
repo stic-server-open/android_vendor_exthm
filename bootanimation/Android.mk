@@ -1,6 +1,7 @@
 #
 # Copyright (C) 2016 The CyanogenMod Project
 #               2017 The LineageOS Project
+#               2020 The exTHmUI Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +26,7 @@ ifeq ($(TARGET_SCREEN_HEIGHT),)
 endif
 
 define build-bootanimation
-    $(shell) vendor/lineage/bootanimation/generate-bootanimation.sh \
+    $(shell) vendor/exthm/bootanimation/generate-bootanimation.sh \
     $(PRODUCT_OUT) \
     $(TARGET_SCREEN_WIDTH) \
     $(TARGET_SCREEN_HEIGHT) \

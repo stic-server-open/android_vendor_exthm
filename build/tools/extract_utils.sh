@@ -604,22 +604,17 @@ function write_header() {
 
     NUM_REGEX='^[0-9]+$'
     if [[ $INITIAL_COPYRIGHT_YEAR =~ $NUM_REGEX ]] && [ $INITIAL_COPYRIGHT_YEAR -le $YEAR ]; then
-        if [ $INITIAL_COPYRIGHT_YEAR -lt 2016 ]; then
-            printf "# Copyright (C) $INITIAL_COPYRIGHT_YEAR-2016 The CyanogenMod Project\n" > $1
-        elif [ $INITIAL_COPYRIGHT_YEAR -eq 2016 ]; then
-            printf "# Copyright (C) 2016 The CyanogenMod Project\n" > $1
-        fi
-        if [ $YEAR -eq 2017 ]; then
-            printf "# Copyright (C) 2017 The LineageOS Project\n" >> $1
+        if [ $YEAR -eq 2019 ]; then
+            printf "# Copyright (C) 2019 The exTHmUI Project\n" >> $1
         elif [ $INITIAL_COPYRIGHT_YEAR -eq $YEAR ]; then
-            printf "# Copyright (C) $YEAR The LineageOS Project\n" >> $1
-        elif [ $INITIAL_COPYRIGHT_YEAR -le 2017 ]; then
-            printf "# Copyright (C) 2017-$YEAR The LineageOS Project\n" >> $1
+            printf "# Copyright (C) $YEAR The exTHmUI Project\n" >> $1
+        elif [ $INITIAL_COPYRIGHT_YEAR -le 2019 ]; then
+            printf "# Copyright (C) 2019-$YEAR The exTHmUI Project\n" >> $1
         else
-            printf "# Copyright (C) $INITIAL_COPYRIGHT_YEAR-$YEAR The LineageOS Project\n" >> $1
+            printf "# Copyright (C) $INITIAL_COPYRIGHT_YEAR-$YEAR The exTHmUI Project\n" >> $1
         fi
     else
-        printf "# Copyright (C) $YEAR The LineageOS Project\n" > $1
+        printf "# Copyright (C) $YEAR The exTHmUI Project\n" > $1
     fi
 
     cat << EOF >> $1
@@ -858,16 +853,16 @@ function oat2dex() {
     local HOST="$(uname)"
 
     if [ -z "$BAKSMALIJAR" ] || [ -z "$SMALIJAR" ]; then
-        export BAKSMALIJAR="$EXTHM_ROOT"/vendor/lineage/build/tools/smali/baksmali.jar
-        export SMALIJAR="$EXTHM_ROOT"/vendor/lineage/build/tools/smali/smali.jar
+        export BAKSMALIJAR="$EXTHM_ROOT"/vendor/exthm/build/tools/smali/baksmali.jar
+        export SMALIJAR="$EXTHM_ROOT"/vendor/exthm/build/tools/smali/smali.jar
     fi
 
     if [ -z "$VDEXEXTRACTOR" ]; then
-        export VDEXEXTRACTOR="$EXTHM_ROOT"/vendor/lineage/build/tools/"$HOST"/vdexExtractor
+        export VDEXEXTRACTOR="$EXTHM_ROOT"/vendor/exthm/build/tools/"$HOST"/vdexExtractor
     fi
 
     if [ -z "$CDEXCONVERTER" ]; then
-        export CDEXCONVERTER="$EXTHM_ROOT"/vendor/lineage/build/tools/"$HOST"/compact_dex_converter
+        export CDEXCONVERTER="$EXTHM_ROOT"/vendor/exthm/build/tools/"$HOST"/compact_dex_converter
     fi
 
     # Extract existing boot.oats to the temp folder
@@ -1142,7 +1137,7 @@ function extract() {
             # If OTA is block based, extract it.
             elif [ -a "$DUMPDIR"/system.new.dat ]; then
                 echo "Converting system.new.dat to system.img"
-                python "$EXTHM_ROOT"/vendor/lineage/build/tools/sdat2img.py "$DUMPDIR"/system.transfer.list "$DUMPDIR"/system.new.dat "$DUMPDIR"/system.img 2>&1
+                python "$EXTHM_ROOT"/vendor/exthm/build/tools/sdat2img.py "$DUMPDIR"/system.transfer.list "$DUMPDIR"/system.new.dat "$DUMPDIR"/system.img 2>&1
                 rm -rf "$DUMPDIR"/system.new.dat "$DUMPDIR"/system
                 mkdir "$DUMPDIR"/system "$DUMPDIR"/tmp
                 echo "Requesting sudo access to mount the system.img"
@@ -1231,7 +1226,7 @@ function extract() {
             printf '    + keeping pinned file with hash %s\n' "${HASH}"
         else
             FOUND=false
-            # Try Lineage target first.
+            # Try exTHm target first.
             # Also try to search for files stripped of
             # the "/system" prefix, if we're actually extracting
             # from a system image.
