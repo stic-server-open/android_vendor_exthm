@@ -1,4 +1,5 @@
 # Copyright (C) 2018-2019 The LineageOS Project
+#           (C) 2020 The exTHmUI Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +15,7 @@
 
 $(call inherit-product, build/target/product/aosp_arm.mk)
 
-include vendor/lineage/build/target/product/exthm_generic_target.mk
+include vendor/exthm/build/target/product/exthm_generic_target.mk
 
 TARGET_USES_64_BIT_BINDER := true
 
