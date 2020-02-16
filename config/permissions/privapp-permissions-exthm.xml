@@ -37,7 +37,7 @@
         <permission name="android.permission.RECOVERY"/>
     </privapp-permissions>
 
-    <privapp-permissions package="org.exthmui.thememanager">
+    <privapp-permissions package="org.exthmui.theme">
         <permission name="android.permission.SET_WALLPAPER"/>
 	<permission name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<permission name="android.permission.WRITE_SETTINGS"/>
