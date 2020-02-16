@@ -13,7 +13,7 @@ endif
 ifndef EXTHM_BUILDTYPE
     ifdef RELEASE_TYPE
         # Starting with "EXTHM_" is optional
-        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^exTHm_||g')
+        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^EXTHM_||g')
         EXTHM_BUILDTYPE := $(RELEASE_TYPE)
     endif
 endif
@@ -29,10 +29,8 @@ ifeq ($(filter RELEASE RC BETA ALPHA EXPERIMENTAL,$(EXTHM_BUILDTYPE)),)
 endif
 
 ifdef EXTHM_BUILDTYPE
-    ifneq ($(EXTHM_BUILDTYPE), ALPHA)
+    ifneq ($(EXTHM_BUILDTYPE), EXPERIMENTAL)
         ifdef EXTHM_EXTRAVERSION
-            # Force build type to EXPERIMENTAL
-            EXTHM_BUILDTYPE := EXPERIMENTAL
             # Remove leading dash from EXTHM_EXTRAVERSION
             EXTHM_EXTRAVERSION := $(shell echo $(EXTHM_EXTRAVERSION) | sed 's/-//')
             # Add leading dash to EXTHM_EXTRAVERSION
