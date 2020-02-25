@@ -158,6 +158,10 @@ PRODUCT_PACKAGES += \
     APlayer \
     Lawnchair
 
+# exTHmUI Theme
+PRODUCT_PACKAGES += \
+    DefaultTheme
+
 # MiPush
 ifneq ($(WITHOUT_MIPUSH),true)
 PRODUCT_PACKAGES += \
