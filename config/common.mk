@@ -167,13 +167,14 @@ ifneq ($(WITHOUT_MIPUSH),true)
 PRODUCT_PACKAGES += \
     MiPushManager \
     MiPushService
-
-PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
-    ro.miui.ui.version.name = V10 \
-    ro.miui.ui.version.code = 8 \
-    ro.miui.version.code_time = 1544025600 \
-    ro.fota.oem = Xiaomi \
-    ro.miui.internal.storage = /sdcard/
+ifeq ($(WITH_MIPUSH_PROP),true)
+    PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+        ro.miui.ui.version.name = V10 \
+        ro.miui.ui.version.code = 8 \
+        ro.miui.version.code_time = 1544025600 \
+        ro.fota.oem = Xiaomi \
+        ro.miui.internal.storage = /sdcard/
+endif
 endif
 
 # Accents
@@ -277,7 +278,7 @@ endif
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI \
-    TrebuchetQuickStep
+    Launcher3QuickStep
 
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/exthm/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/exthm/overlay/common
