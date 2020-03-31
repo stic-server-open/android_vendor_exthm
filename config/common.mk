@@ -192,6 +192,49 @@ PRODUCT_PACKAGES += \
     LineageRedAccent \
     LineageYellowAccent
 
+# Accents from crDroid
+PRODUCT_PACKAGES += \
+    Amber \
+    BlueGrey \
+    DeepOrange \
+    DeepPurple \
+    Grey \
+    Indigo \
+    LightBlue \
+    LightGreen \
+    Lime \
+    Teal \
+    White
+
+# Brand Accents from crDroid
+PRODUCT_PACKAGES += \
+    AospaGreen \
+    AndroidOneGreen \
+    CocaColaRed \
+    DiscordPurple \
+    FacebookBlue \
+    InstagramCerise \
+    JollibeeCrimson \
+    MonsterEnergyGreen \
+    NextbitMint \
+    OneplusRed \
+    PepsiBlue \
+    PocophoneYellow \
+    RazerGreen \
+    SamsungBlue \
+    SpotifyGreen \
+    StarbucksGreen \
+    TwitchPurple \
+    TwitterBlue \
+    XboxGreen \
+    XiaomiOrange
+
+# Dark Styles from crDroid
+PRODUCT_PACKAGES += \
+    SystemAmoledBlack \
+    SystemCharcoalBlack \
+    SystemMidnightBlue
+
 # Themes
 PRODUCT_PACKAGES += \
     LineageThemesStub \
