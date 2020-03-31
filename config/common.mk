@@ -141,6 +141,7 @@ PRODUCT_PACKAGES += \
     LineageParts \
     LineageSettingsProvider \
     LineageSetupWizard \
+    TrebuchetQuickStep \
     Eleven \
     Jelly \
     LockClock \
@@ -155,8 +156,7 @@ PRODUCT_PACKAGES += \
 
 # Custom exTHmUI packages
 PRODUCT_PACKAGES += \
-    APlayer \
-    Lawnchair
+    APlayer
 
 # exTHmUI Theme
 PRODUCT_PACKAGES += \
@@ -321,7 +321,7 @@ endif
 # Dex preopt
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI \
-    Launcher3QuickStep
+    TrebuchetQuickStep
 
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/exthm/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/exthm/overlay/common
