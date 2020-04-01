@@ -326,6 +326,12 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/exthm/overlay
 DEVICE_PACKAGE_OVERLAYS += vendor/exthm/overlay/common
 
+# FOD
+ifeq ($(EXTRA_FOD_ANIMATIONS),true)
+DEVICE_PACKAGE_OVERLAYS += vendor/exthm/overlay/fod
+PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/exthm/overlay/fod
+endif
+
 -include vendor/exthm/config/generate_version.mk
 
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
