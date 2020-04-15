@@ -192,6 +192,9 @@ PRODUCT_PACKAGES += \
     LineageRedAccent \
     LineageYellowAccent
 
+# Extra accents
+ifeq ($(EXTRA_ACCENTS),true)
+
 # Accents from crDroid
 PRODUCT_PACKAGES += \
     Amber \
@@ -228,6 +231,7 @@ PRODUCT_PACKAGES += \
     TwitterBlue \
     XboxGreen \
     XiaomiOrange
+endif
 
 # Dark Styles from crDroid
 PRODUCT_PACKAGES += \
