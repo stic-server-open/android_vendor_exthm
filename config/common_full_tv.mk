@@ -1,14 +1,4 @@
-# Exclude AudioFX
-TARGET_EXCLUDES_AUDIOFX := true
+# This config is for legacy purposes, there are no atv product size variants
 
-# Inherit full common exTHm stuff
-$(call inherit-product, vendor/exthm/config/common_full.mk)
-
-# Inherit exTHm atv device tree
-$(call inherit-product, device/lineage/atv/lineage_atv.mk)
-
-PRODUCT_PACKAGES += \
-    AppDrawer \
-    LineageCustomizer
-
-DEVICE_PACKAGE_OVERLAYS += vendor/exthm/overlay/tv
+# Inherit common atv exTHm stuff
+$(call inherit-product, vendor/exthm/config/common_tv.mk)

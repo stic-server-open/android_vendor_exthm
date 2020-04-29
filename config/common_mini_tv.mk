@@ -1,5 +1,4 @@
-# Exclude AudioFX
-TARGET_EXCLUDES_AUDIOFX := true
+# This config is for legacy purposes, there are no atv product size variants
 
-# Inherit mini common exTHm stuff
-$(call inherit-product, vendor/exthm/config/common_mini.mk)
+# Inherit common atv exTHm stuff
+$(call inherit-product, vendor/exthm/config/common_tv.mk)

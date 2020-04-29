@@ -1185,7 +1185,7 @@ function oat2dex() {
     local SRC="$3"
     local TARGET=
     local OAT=
-    local HOST="$(uname)"
+    local HOST="$(uname | tr '[:upper:]' '[:lower:]')"
 
     if [ -z "$BAKSMALIJAR" ] || [ -z "$SMALIJAR" ]; then
         export BAKSMALIJAR="$EXTHM_ROOT"/prebuilts/tools-lineage/common/smali/baksmali.jar
@@ -1193,11 +1193,11 @@ function oat2dex() {
     fi
 
     if [ -z "$VDEXEXTRACTOR" ]; then
-        export VDEXEXTRACTOR="$EXTHM_ROOT"/prebuilts/tools-lineage/"${HOST,,}"-x86/bin/vdexExtractor
+        export VDEXEXTRACTOR="$EXTHM_ROOT"/prebuilts/tools-lineage/${HOST}-x86/bin/vdexExtractor
     fi
 
     if [ -z "$CDEXCONVERTER" ]; then
-        export CDEXCONVERTER="$EXTHM_ROOT"/prebuilts/tools-lineage/"${HOST,,}"-x86/bin/compact_dex_converter
+        export CDEXCONVERTER="$EXTHM_ROOT"/prebuilts/tools-lineage/${HOST}-x86/bin/compact_dex_converter
     fi
 
     # Extract existing boot.oats to the temp folder
@@ -1469,18 +1469,28 @@ function extract() {
             if [ -a "$DUMPDIR"/payload.bin ]; then
                 echo "A/B style OTA zip detected. This is not supported at this time. Stopping..."
                 exit 1
-            # If OTA is block based, extract it.
-            elif [ -a "$DUMPDIR"/system.new.dat ]; then
-                echo "Converting system.new.dat to system.img"
-                python "$EXTHM_ROOT"/vendor/exthm/build/tools/sdat2img.py "$DUMPDIR"/system.transfer.list "$DUMPDIR"/system.new.dat "$DUMPDIR"/system.img 2>&1
-                rm -rf "$DUMPDIR"/system.new.dat "$DUMPDIR"/system
-                mkdir "$DUMPDIR"/system "$DUMPDIR"/tmp
-                echo "Requesting sudo access to mount the system.img"
-                sudo mount -o loop "$DUMPDIR"/system.img "$DUMPDIR"/tmp
-                cp -r "$DUMPDIR"/tmp/* "$DUMPDIR"/system/
-                sudo umount "$DUMPDIR"/tmp
-                rm -rf "$DUMPDIR"/tmp "$DUMPDIR"/system.img
             fi
+
+            for PARTITION in "system" "odm" "product" "vendor"
+            do
+                # If OTA is block based, extract it.
+                if [ -a "$DUMPDIR"/"$PARTITION".new.dat.br ]; then
+                    echo "Converting "$PARTITION".new.dat.br to "$PARTITION".new.dat"
+                    brotli -d "$DUMPDIR"/"$PARTITION".new.dat.br
+                    rm "$DUMPDIR"/"$PARTITION".new.dat.br
+                fi
+                if [ -a "$DUMPDIR"/"$PARTITION".new.dat ]; then
+                    echo "Converting "$PARTITION".new.dat to "$PARTITION".img"
+                    python "$EXTHM_ROOT"/vendor/exthm/build/tools/sdat2img.py "$DUMPDIR"/"$PARTITION".transfer.list "$DUMPDIR"/"$PARTITION".new.dat "$DUMPDIR"/"$PARTITION".img 2>&1
+                    rm -rf "$DUMPDIR"/"$PARTITION".new.dat "$DUMPDIR"/"$PARTITION"
+                    mkdir "$DUMPDIR"/"$PARTITION" "$DUMPDIR"/tmp
+                    echo "Requesting sudo access to mount the "$PARTITION".img"
+                    sudo mount -o loop "$DUMPDIR"/"$PARTITION".img "$DUMPDIR"/tmp
+                    cp -r "$DUMPDIR"/tmp/* "$DUMPDIR"/"$PARTITION"/
+                    sudo umount "$DUMPDIR"/tmp
+                    rm -rf "$DUMPDIR"/tmp "$DUMPDIR"/"$PARTITION".img
+                fi
+            done
         fi
 
         SRC="$DUMPDIR"
@@ -1528,8 +1538,8 @@ function extract() {
         fi
 
         # Strip the file path in the vendor repo of "system", if present
-        local VENDOR_REPO_FILE="$OUTPUT_DIR/${DST_FILE#/system}"
         local BLOB_DISPLAY_NAME="${DST_FILE#/system/}"
+        local VENDOR_REPO_FILE="$OUTPUT_DIR/${BLOB_DISPLAY_NAME}"
         mkdir -p $(dirname "${VENDOR_REPO_FILE}")
 
         # Check pinned files
@@ -1585,6 +1595,7 @@ function extract() {
         if [[ "$FULLY_DEODEXED" -ne "1" && "${VENDOR_REPO_FILE}" =~ .(apk|jar)$ ]]; then
             oat2dex "${VENDOR_REPO_FILE}" "${SRC_FILE}" "$SRC"
             if [ -f "$TMPDIR/classes.dex" ]; then
+                touch -t 200901010000 "$TMPDIR/classes"*
                 zip -gjq "${VENDOR_REPO_FILE}" "$TMPDIR/classes"*
                 rm "$TMPDIR/classes"*
                 printf '    (updated %s from odex files)\n' "${SRC_FILE}"
