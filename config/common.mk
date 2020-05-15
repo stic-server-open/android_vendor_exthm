@@ -68,30 +68,11 @@ PRODUCT_COPY_FILES += \
 
 # This is NOT :) Lineage!
 PRODUCT_COPY_FILES += \
-    vendor/exthm/config/permissions/org.lineageos.android.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/org.lineageos.android.xml \
-    vendor/exthm/config/permissions/privapp-permissions-lineage-system.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-lineage.xml \
-    vendor/exthm/config/permissions/privapp-permissions-lineage-product.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-lineage.xml \
-    vendor/exthm/config/permissions/privapp-permissions-cm-legacy.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-cm-legacy.xml
-
-# No! This is exTHm!
-PRODUCT_COPY_FILES += \
-    vendor/exthm/config/permissions/privapp-permissions-exthm.xml:system/etc/permissions/privapp-permissions-exthm.xml
+    vendor/exthm/config/permissions/org.lineageos.android.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/org.lineageos.android.xml
 
 # Enforce privapp-permissions whitelist
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.control_privapp_permissions=enforce
-
-# Hidden API whitelist
-PRODUCT_COPY_FILES += \
-    vendor/exthm/config/permissions/exthm-hiddenapi-package-whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/exthm-hiddenapi-package-whitelist.xml
-
-# Power whitelist
-PRODUCT_COPY_FILES += \
-    vendor/exthm/config/permissions/exthm-power-whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/exthm-power-whitelist.xml
-
-# Pre-granted permissions
-PRODUCT_COPY_FILES += \
-    vendor/exthm/config/permissions/exthm-default-permissions.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/exthm-default-permissions.xml
 
 # Include AOSP audio files
 include vendor/exthm/config/aosp_audio.mk
