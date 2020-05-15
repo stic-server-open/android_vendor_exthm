@@ -132,39 +132,3 @@ ifeq ($(EXTRA_FOD_ANIMATIONS),true)
 DEVICE_PACKAGE_OVERLAYS += vendor/exthm/overlay/fod
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/exthm/overlay/fod
 endif
-
-# Extra fonts
-ifeq ($(EXTRA_FONTS),true)
-
-PRODUCT_COPY_FILES += \
-    vendor/exthm/prebuilt/fonts/fonts_customization.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/fonts_customization.xml \
-    $(call find-copy-subdir-files,*,vendor/exthm/prebuilt/fonts/ttf,$(TARGET_COPY_OUT_PRODUCT)/fonts)
-
-PRODUCT_PACKAGES += \
-	FontAclonicaSourceOverlay \
-	FontAmaranteSourceOverlay \
-	FontBariolSourceOverlay \
-	FontCagliostroSourceOverlay \
-	FontComfortaaSourceOverlay \
-	FontExotwoSourceOverlay \
-	FontStoropiaSourceOverlay \
-	FontUbuntuSourceOverlay \
-	FontComicSansSourceOverlay \
-	FontCoolstorySourceOverlay \
-	FontGoogleSansSourceOverlay \
-	FontLGSmartGothicSourceOverlay \
-	FontNotoSerifSourceOverlay \
-	FontOneplusSlateSource \
-	FontRosemarySourceOverlay \
-	FontSamsungOneSourceOverlay \
-	FontSonySketchSourceOverlay \
-	FontSurferSourceOverlay \
-	FontNokiaPureSourceOverlay \
-	FontNunitoSourceOverlay \
-	FontFifa2018SourceOverlay \
-	FontCoconSourceOverlay \
-	FontQuandoSourceOverlay \
-	FontGrandHotelSourceOverlay \
-	FontRedressedSourceOverlay
-
-endif
