@@ -35,7 +35,8 @@ PRODUCT_PACKAGES += \
 
 # Custom exTHmUI packages
 PRODUCT_PACKAGES += \
-    APlayer
+    APlayer \
+    YellowPage
 
 # exTHmUI Theme
 PRODUCT_PACKAGES += \
