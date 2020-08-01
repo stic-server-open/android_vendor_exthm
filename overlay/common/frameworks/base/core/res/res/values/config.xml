@@ -88,4 +88,6 @@
      -->
     <string name="config_defaultWellbeingPackage">com.google.android.apps.wellbeing</string>
 
+    <!-- The name of the package that will hold the call screening role by default. -->
+    <string name="config_defaultCallScreening" translatable="false">org.exthmui.yellowpage</string>
 </resources>
