@@ -1,6 +1,5 @@
 # exTHmUI core functionality
 on init
-    export ANDROID_CACHE /cache
     export TERMINFO /system/etc/terminfo
 
 on post-fs-data
@@ -13,10 +12,6 @@ on post-fs-data
     # Smart Charging
     chown system system /sys/class/power_supply/battery/battery_charging_enabled
     chown system system /sys/class/power_supply/battery/charging_enabled
-
-on boot
-    # Persistent properties (only created if persist exists)
-    mkdir /persist/properties 0770 system system
 
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B -z \
