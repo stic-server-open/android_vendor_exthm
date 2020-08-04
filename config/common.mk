@@ -125,12 +125,6 @@ PRODUCT_PACKAGES += \
     ThemeManager \
     Updater
 
-# Dark Styles from crDroid
-PRODUCT_PACKAGES += \
-    SystemAmoledBlack \
-    SystemCharcoalBlack \
-    SystemMidnightBlue
-
 # Themes
 PRODUCT_PACKAGES += \
     LineageThemesStub \
