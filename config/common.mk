@@ -125,6 +125,12 @@ PRODUCT_PACKAGES += \
     ThemeManager \
     Updater
 
+# AudioHQ
+PRODUCT_PACKAGES += \
+    libaudioheadquarter \
+    audiohq \
+    audiohqserver
+
 # Themes
 PRODUCT_PACKAGES += \
     LineageThemesStub \
