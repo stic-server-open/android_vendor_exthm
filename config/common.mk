@@ -123,7 +123,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Longshot \
     ThemeManager \
-    Updater
+    Updater \
+    GamingMode
 
 # Themes
 PRODUCT_PACKAGES += \
