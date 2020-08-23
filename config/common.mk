@@ -121,7 +121,7 @@ PRODUCT_PACKAGES += \
 
 # Core exTHmUI packages
 PRODUCT_PACKAGES += \
-    Longshot \
+    StitchImage \
     ThemeManager \
     Updater \
     GamingMode
