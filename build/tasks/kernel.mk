@@ -41,6 +41,9 @@
 #                                          For example, for ARM devices,
 #                                          use zImage-dtb instead of zImage.
 #
+#   TARGET_KERNEL_NO_PREBUILT_DTC      = This makes it use the latest source built dtc instead of the prebuilt,
+#                                          which is too old for coral/4.14
+#
 #   BOARD_DTBO_CFG                     = Path to a mkdtboimg.py config file
 #
 #   BOARD_CUSTOM_DTBOIMG_MK            = Path to a custom dtboimage makefile
@@ -213,6 +216,10 @@ PATH_OVERRIDE += PATH=$(KERNEL_TOOLCHAIN_PATH_gcc)/bin:$$PATH
 PATH_OVERRIDE += $(TOOLS_PATH_OVERRIDE)
 
 KERNEL_ADDITIONAL_CONFIG_OUT := $(KERNEL_OUT)/.additional_config
+
+ifeq ($(TARGET_KERNEL_NO_PREBUILT_DTC),true)
+    KERNEL_MAKE_FLAGS += DTC=$(KERNEL_BUILD_OUT_PREFIX)$(DTC)
+endif
 
 # Internal implementation of make-kernel-target
 # $(1): output path (The value passed to O=)
