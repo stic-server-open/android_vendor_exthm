@@ -23,4 +23,18 @@ EXTHM_TARGET_PACKAGE := $(PRODUCT_OUT)/exthm-$(EXTHM_VERSION).zip
 bacon: $(INTERNAL_OTA_PACKAGE_TARGET)
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(EXTHM_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(EXTHM_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(EXTHM_TARGET_PACKAGE).md5sum
-	@echo "Package Complete: $(EXTHM_TARGET_PACKAGE)" >&2
+	@echo -e ${CL_CYN}"===========-Package Build Complete-==========="${CL_RST}
+	@echo -e ${CL_CYN}"Package File: $(EXTHM_TARGET_PACKAGE)" >&2 ${CL_RST}
+	@echo -e ${CL_CYN}"MD5: "${CL_MAG}" `cat $(EXTHM_TARGET_PACKAGE).md5 | cut -d ' ' -f 1`"${CL_RST}
+	@echo -e ${CL_CYN}"Size:"${CL_MAG}" `ls -lah $(EXTHM_TARGET_PACKAGE) | cut -d ' ' -f 5`"${CL_RST}
+	@echo -e ${CL_CYN}"==============================================="${CL_RST}
+	@echo -e ${CL_CYN}"exTHmUI -- Based on LineageOS(P/Q) / AOSP(R)"${CL_RST}
+	@echo -e ${CL_CYN}"Visit our website https://exthmui.cn or our  "${CL_RST}
+	@echo -e ${CL_CYN}"source repo https://github.com/exthmui for "${CL_RST}
+	@echo -e ${CL_CYN}"more information.  "${CL_RST}
+	@echo -e ${CL_CYN}"==============================================="${CL_RST}
+	@echo -e ${CL_CYN}"Special Thanks:cjybyjk, Color-yourself, KevinZonda, "${CL_RST}
+	@echo -e ${CL_CYN}"kmou424, GoogleChinaCEO, ISNing, and all the other "${CL_RST}
+	@echo -e ${CL_CYN}"individuals and organizations that contribute!"${CL_RST}
+	@echo -e ${CL_CYN}"==============================================="${CL_RST}
+
