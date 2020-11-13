@@ -23,9 +23,10 @@ EXTHM_TARGET_PACKAGE := $(PRODUCT_OUT)/exthm-$(EXTHM_VERSION).zip
 bacon: $(INTERNAL_OTA_PACKAGE_TARGET)
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(EXTHM_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(EXTHM_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(EXTHM_TARGET_PACKAGE).md5sum
+	@echo ${CL_CYN}"  "${CL_RST}
 	@echo -e ${CL_CYN}"===========-Package Build Complete-==========="${CL_RST}
 	@echo -e ${CL_CYN}"Package File: $(EXTHM_TARGET_PACKAGE)" >&2 ${CL_RST}
-	@echo -e ${CL_CYN}"MD5: "${CL_MAG}" `cat $(EXTHM_TARGET_PACKAGE).md5 | cut -d ' ' -f 1`"${CL_RST}
+	@echo -e ${CL_CYN}"MD5: "${CL_MAG}" `cat $(EXTHM_TARGET_PACKAGE).md5sum | cut -d ' ' -f 1`"${CL_RST}
 	@echo -e ${CL_CYN}"Size:"${CL_MAG}" `ls -lah $(EXTHM_TARGET_PACKAGE) | cut -d ' ' -f 5`"${CL_RST}
 	@echo -e ${CL_CYN}"==============================================="${CL_RST}
 	@echo -e ${CL_CYN}"exTHmUI -- Based on LineageOS(P/Q) / AOSP(R)"${CL_RST}
