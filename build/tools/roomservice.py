@@ -42,11 +42,11 @@ except ImportError:
 
 DEBUG = False
 
-custom_local_manifest = ".repo/local_manifests/pixel.xml"
-custom_default_revision =  os.getenv('ROOMSERVICE_DEFAULT_BRANCH', 'eleven')
-custom_dependencies = "aosp.dependencies"
-org_manifest = "pixel-devices"  # leave empty if org is provided in manifest
-org_display = "PixelExperience-Devices"  # needed for displaying
+custom_local_manifest = ".repo/local_manifests/exthm.xml"
+custom_default_revision =  os.getenv('ROOMSERVICE_DEFAULT_BRANCH', 'exthm-11')
+custom_dependencies = "exthm.dependencies"
+org_manifest = "exthmui-devices"  # leave empty if org is provided in manifest
+org_display = "exTHmUI-Devices"  # needed for displaying
 
 github_auth = None
 

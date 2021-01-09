@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2016 The CyanogenMod Project
 # Copyright (C) 2017-2020 The LineageOS Project
-#           (C) 2020 The PixelExperience Project
+#           (C) 2020 The exTHmUI Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -939,13 +939,13 @@ function write_blueprint_header() {
     NUM_REGEX='^[0-9]+$'
     if [[ $BLUEPRINT_INITIAL_COPYRIGHT_YEAR -eq $YEAR ]]; then
         printf " * Copyright (C) $YEAR The LineageOS Project\n" >> $1
-        printf " * Copyright (C) $YEAR The PixelExperience Project\n" >> $1
+        printf " * Copyright (C) $YEAR The exTHmUI Project\n" >> $1
     elif [[ $BLUEPRINT_INITIAL_COPYRIGHT_YEAR -le 2019 ]]; then
         printf " * Copyright (C) 2019-$YEAR The LineageOS Project\n" >> $1
-        printf " * Copyright (C) 2019-$YEAR The PixelExperience Project\n" >> $1
+        printf " * Copyright (C) 2019-$YEAR The exTHmUI Project\n" >> $1
     else
         printf " * Copyright (C) $BLUEPRINT_INITIAL_COPYRIGHT_YEAR-$YEAR The LineageOS Project\n" >> $1
-        printf " * Copyright (C) $BLUEPRINT_INITIAL_COPYRIGHT_YEAR-$YEAR The PixelExperience Project\n" >> $1
+        printf " * Copyright (C) $BLUEPRINT_INITIAL_COPYRIGHT_YEAR-$YEAR The exTHmUI Project\n" >> $1
     fi
 
     cat << EOF >> $1
@@ -995,20 +995,20 @@ function write_makefile_header() {
         fi
         if [ $YEAR -eq 2017 ]; then
             printf "# Copyright (C) 2017 The LineageOS Project\n" >> $1
-            printf "# Copyright (C) 2017 The PixelExperience Project\n" >> $1
+            printf "# Copyright (C) 2017 The exTHmUI Project\n" >> $1
         elif [ $INITIAL_COPYRIGHT_YEAR -eq $YEAR ]; then
             printf "# Copyright (C) $YEAR The LineageOS Project\n" >> $1
-            printf "# Copyright (C) $YEAR The PixelExperience Project\n" >> $1
+            printf "# Copyright (C) $YEAR The exTHmUI Project\n" >> $1
         elif [ $INITIAL_COPYRIGHT_YEAR -le 2017 ]; then
             printf "# Copyright (C) 2017-$YEAR The LineageOS Project\n" >> $1
-            printf "# Copyright (C) 2017-$YEAR The PixelExperience Project\n" >> $1
+            printf "# Copyright (C) 2017-$YEAR The exTHmUI Project\n" >> $1
         else
             printf "# Copyright (C) $INITIAL_COPYRIGHT_YEAR-$YEAR The LineageOS Project\n" >> $1
-            printf "# Copyright (C) $INITIAL_COPYRIGHT_YEAR-$YEAR The PixelExperience Project\n" >> $1
+            printf "# Copyright (C) $INITIAL_COPYRIGHT_YEAR-$YEAR The exTHmUI Project\n" >> $1
         fi
     else
         printf "# Copyright (C) $YEAR The LineageOS Project\n" >> $1
-        printf "# Copyright (C) $YEAR The PixelExperience Project\n" >> $1
+        printf "# Copyright (C) $YEAR The exTHmUI Project\n" >> $1
     fi
 
     cat << EOF >> $1
