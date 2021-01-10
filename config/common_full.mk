@@ -1,4 +1,4 @@
 # Inherit common exTHmUI stuff
-$(call inherit-product, vendor/aosp/config/common.mk)
+$(call inherit-product, vendor/exthm/config/common.mk)
 
 PRODUCT_SIZE := full

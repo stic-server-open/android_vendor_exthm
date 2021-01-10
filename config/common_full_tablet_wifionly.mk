@@ -1,2 +1,2 @@
 # Inherit full common exTHmUI stuff
-$(call inherit-product, vendor/aosp/config/common_full.mk)
+$(call inherit-product, vendor/exthm/config/common_full.mk)
